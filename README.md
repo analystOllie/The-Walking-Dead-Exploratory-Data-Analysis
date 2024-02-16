@@ -1,1 +1,3 @@
-# The-Walking-Dead-Advanced-EDA
+# **The-Walking-Dead-Advanced-EDA**
+
+## **Introduction**
