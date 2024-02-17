@@ -302,8 +302,8 @@ twd_dataset.loc[twd_dataset['written_by'] == 'Story by: Scott M. Gimple and Chan
 twd_dataset.loc[twd_dataset['written_by'] == 'Story by: Scott M. Gimple and David Leslie Johnson-McGoldrick and Angela KangTeleplay by: David Leslie Johnson-McGoldrick and Angela Kang', 'written_by'] = 'Scott M. Gimple and David Leslie Johnson-McGoldrick and Angela Kang'
 twd_dataset.loc[twd_dataset['written_by'] == 'Story by: Scott M. Gimple and Matthew NegreteTeleplay by: Matthew Negrete', 'written_by'] = 'Scott M. Gimple and Matthew Negrete'
 ```
-Dataset was finally complete and clean so I saved it before moving on. 
+After this step number of **directors** changed from **57** to **55** and number of **writers** chnged from **69** to **67**. Dataset was finally complete and clean so I saved it before moving on. 
 ```python
 twd_dataset.to_csv('TWD_dataset.csv', encoding = 'utf-8', index = False)
 ```
-At this point I did everything with data in phase of preparing for analysis. So let's move on to some REAL analysis stuff.
+At this point I did everything with data in phase of preparing data for analysis. So let's move on to some **REAL** analysis stuff.🦸
