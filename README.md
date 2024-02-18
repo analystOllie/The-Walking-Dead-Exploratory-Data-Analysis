@@ -49,7 +49,7 @@ Second files is **the_walking_dead_imdb.csv** this file has less columns than pr
 ## Data Cleaning And Preparation
 Before I started with analysis in Python I took a peek at both files in Excel. Because both files has almost same structure and share majority of columns I diceded to merge these two files into before diving into analysis.<br>
   
-### Importing libraries
+### Importing Libraries
 I start my analysis by importing libraries of Python packages for needs of my analysis.
 ```python
 import pandas as pd
@@ -59,7 +59,7 @@ from scipy.stats import ttest_ind
 from scipy.stats import kruskal
 ```
 
-### Preparing dataset
+### Preparing Dataset
 Then I loaded both files into dataframes.
 ```python
 episodes = pd.read_csv('the_walking_dead_episodes.csv')
@@ -117,7 +117,7 @@ Also I renamed column `desc` which has synopsis of episode to `episode_synopsis`
 ```python
 twd_dataset.rename(columns = {'desc': 'episode_synopsis'}, inplace = True)
 ```
-### Observing and cleaning
+### Observing And Cleaning
 At this moment dataset was ready so I took a step and looked at dataste more closely. First of all I check some basic informations about dataset.
 ```python
 twd_dataset
