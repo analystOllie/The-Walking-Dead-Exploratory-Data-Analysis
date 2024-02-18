@@ -1,10 +1,11 @@
 # **The-Walking-Dead-Advanced-EDA**
 
 ## **Introduction**
+![TWD Logo](img/TWD_logo_Readme.png)
 The Walking Dead is an American zombie horror television series produced by [**AMC**](https://en.wikipedia.org/wiki/AMC_Networks). The show is based on acclaimed comic book series created by Robert Kirkman (also known for Invencible, Outacst, Oblivion Song ...), which follows a group of survivors led by former sheriff's deputy **Rick Grimes** as they navigate the dangers of this new world, including not only the relentless threat of the undead but also conflicts with other survivors, internal power struggles, and the struggle to maintain their humanity in the face of unimaginable horror.  
   
 The series premiered on **October 31, 2010** and ended it's run with the **11th** and **final** season on **November 20, 2022** ending series after **177 episodes**. During it's 11 seasons The Walking Dead gained massive and supportive fanbase that is still engaged in the world of The Walking Dead. Based on a huge success creators developed to this date (February, 2024) **six other spin-off shows** like Fear The Walking Dead, The Walking Dead Dead City or The Walking Dead The Ones Who Live.  
-
+  
 <p align = "center">
   <b>"Hey, you. Dumbass." -Glenn Rhee</b>
 </p>
@@ -45,6 +46,10 @@ Second files is **the_walking_dead_imdb.csv** this file has less columns than pr
 | **1**          | episode_num_in_season | episode number in season | **5**           | total_votes        | total number of votes that <br>the IMDB rating was based on |
 | **2**          | title                 | title of the episode     | **6**           | desc               | episode synopsis                                            |
 | **3**          | original_air_date     | original air date        |                 |                    |                                                             |
+
+<p align = "center">
+  <b>"We are the walking dead." -Rick Grimes</b>
+</p>
 
 ## Data Cleaning And Preparation
 Before I started with analysis in Python I took a peek at both files in Excel. Because both files has almost same structure and share majority of columns I diceded to merge these two files into before diving into analysis.<br>
