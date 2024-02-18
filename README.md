@@ -327,4 +327,4 @@ plt.title('Number of Episodes by Season')
 plt.show()
 plt.savefig('number_of_episodes_by_season.png')
 ```
-![Number Of Episodes By Season](img/number_of_episodes_by_season.png.png)  
+![Number Of Episodes By Season](img/number_of_episodes_by_season.png)  
