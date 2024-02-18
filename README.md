@@ -47,9 +47,9 @@ Second files is **the_walking_dead_imdb.csv** this file has less columns than pr
 | **1**          | episode_num_in_season | episode number in season | **5**           | total_votes        | total number of votes that <br>the IMDB rating was based on |
 | **2**          | title                 | title of the episode     | **6**           | desc               | episode synopsis                                            |
 | **3**          | original_air_date     | original air date        |                 |                    |                                                             |
-
-<p align = "center">
-  <b>"We Are The Walking Dead." -Rick Grimes</b>
+<p align="center">
+  <span style="font-size: 35px; color: blue; font-weight: bold;"><b>"We Are The Walking Dead." -Rick Grimes</b></span>
+  <span style="color: blue;">This text is also blue</span>
 </p>
 
 ## Data Cleaning And Preparation
