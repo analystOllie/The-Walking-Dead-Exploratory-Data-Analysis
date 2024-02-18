@@ -14,12 +14,12 @@ The series premiered on **October 31, 2010** and ended it's run with the **11th*
 - ⚙️[Data source](#data-source)
   - [Episodes](#episodes)
   - [IMDB](#imdb)
-- 🔍[Analysis](#analysis)
-  - [Importing libraries](#importing-libraries)
-  - [Preparing dataset](#preparing-dataset)
-  - [Observing and cleaning](#observing-and-cleaning)
+- 🔍[Data Cleaning & Preparation](#data-cleaning-&-preparation)
+  - [Importing Libraries](#importing-libraries)
+  - [Preparing Dataset](#preparing-dataset)
+  - [Observing And Cleaning](#observing-and-cleaning)
 - 💡[Recommendations](#recommendations)
-- 🔖[Used sources](#used-sources)
+- 🔖[Used Sources](#used-sources)
 
 ## Data Source
 For this analysis I used dataset [The Walking Dead Episodes](https://www.kaggle.com/datasets/bcruise/the-walking-dead-episodes/data) (CC0: Public Domain, dataset made available through [Bill Cruise](https://www.kaggle.com/bcruise)).  
@@ -46,11 +46,8 @@ Second files is **the_walking_dead_imdb.csv** this file has less columns than pr
 | **2**          | title                 | title of the episode     | **6**           | desc               | episode synopsis                                            |
 | **3**          | original_air_date     | original air date        |                 |                    |                                                             |
 
-## Analysis
+## Data Cleaning & Preparation
 Before I started with analysis in Python I took a peek at both files in Excel. Because both files has almost same structure and share majority of columns I diceded to merge these two files into before diving into analysis.<br>
-  
-`Please Note:`  
-I didn't include in this reading section dedicated to cleaning because I was't cleaning the data all at once but gradually as I encountered individual errors or problems in dataset.
   
 ### Importing libraries
 I start my analysis by importing libraries of Python packages for needs of my analysis.
