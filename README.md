@@ -62,6 +62,7 @@ I start my analysis by importing libraries of Python packages for needs of my an
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 from scipy.stats import ttest_ind
 from scipy.stats import kruskal
 ```
@@ -336,7 +337,8 @@ plt.savefig('number_of_episodes_by_season.png')
 - **tenth** season had **22** epsiodes
 - **eleventh** season had **24** episodes
 - all **remaining** season had **16** episodes
-As next I took a look at vierwship over the series.
+As next I took a looked at vierwship over the series as well with IMDB ratings over the series.
 ```python
 
 ```
+![IMDB and US Viewership Across the Series](img/viewers_and_imdb_over_the_series_merged.png) 
