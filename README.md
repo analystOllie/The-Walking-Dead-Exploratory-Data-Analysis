@@ -264,10 +264,9 @@ I didn't include output of this code because it's too long, but I will provide m
 cols = twd_dataset.columns.tolist()
 
 for stat in cols:
-  print(stat)
+  print('\n' + str(stat))
   print(twd_dataset[stat].unique())
   print('Number of unique: ' + str(twd_dataset[stat].nunique()))
-  print('\n')
 ```
 **Key Takeaways:**
 - there are **11** unique seasons
@@ -304,7 +303,7 @@ twd_dataset.loc[twd_dataset['written_by'] == 'Story by: Scott M. Gimple and Chan
 twd_dataset.loc[twd_dataset['written_by'] == 'Story by: Scott M. Gimple and David Leslie Johnson-McGoldrick and Angela KangTeleplay by: David Leslie Johnson-McGoldrick and Angela Kang', 'written_by'] = 'Scott M. Gimple and David Leslie Johnson-McGoldrick and Angela Kang'
 twd_dataset.loc[twd_dataset['written_by'] == 'Story by: Scott M. Gimple and Matthew NegreteTeleplay by: Matthew Negrete', 'written_by'] = 'Scott M. Gimple and Matthew Negrete'
 ```
-After this step number of **writers** chnged from **69** to **67**. Dataset was finally complete and clean so I saved it before moving on. 
+After this step number of **writers** chnged from **69** to **66**. Dataset was finally complete and clean so I saved it before moving on. 
 ```python
 twd_dataset.to_csv('TWD_dataset.csv', encoding = 'utf-8', index = False)
 ```
@@ -313,5 +312,19 @@ At this point I did everything with data in phase of preparing data for analysis
 ## Analysis
 I started my analysis with something basic. I looked at episode distribution over the seasons.
 ```python
+season = twd_dataset['season'].unique()
+episode = twd_dataset['season'].value_counts(sort = False)
+colors = ['#F2DCB3', '#EED5A0', '#E6C98A', '#DEC074', '#D6B35E', '#CEA748', '#C69A32', '#B58C28', '#A57D1F', '#954F15', '#85420D']
 
+ax = plt.bar(season, episode, color = colors)
+ax = plt.gca()
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+plt.xlabel('Season')
+plt.ylabel('Number of Episodes')
+plt.xticks([1,2,3,4,5,6,7,8,9,10,11])
+plt.title('Number of Episodes by Season')
+plt.show()
+plt.savefig('number_of_episodes_by_season.png')
 ```
+![Number Of Episodes By Season](img/number_of_episodes_by_season.png.png)  
