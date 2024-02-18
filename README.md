@@ -192,7 +192,7 @@ Output:
 **Key Takeaways:**  
 - seasons are from **1** to **11**
 - episdoes are from **1** to **177**
-- average US viewers, IMDB rating and total votes will be **`analyzed more in depth later`**
+- average US viewers, IMDB rating and total votes will be **analyzed more in depth later**
 ```python
 display(twd_dataset.describe(include = 'object'))
 
@@ -205,7 +205,7 @@ Output:
 | freq          | 1              | 37              | 15           | 10                                                   |
 ```
 **Key Takeaways:**  
-`Please Note:`  
+**_Please Note:_**  
 Later I discovered that names of some directors are not cleaned so take this part as initial look at data not final conclusion.
 - **Greg Nicotero** directed most episodes
 - **Angela Kang** wrote most episodes
@@ -252,8 +252,8 @@ total_votes                       int64
 episode_synopsis                 object
 dtype: object
 ```
-Before I moved to some actual analysis lastly I looked at what values are stored in columns and also checked how many values are unique so I woudn't japerdise analysis by skipping this important step. I used `for` loop to get info about all colums.  
-`Please Note:`  
+Before I moved to some actual analysis lastly I looked at what values are stored in columns and also checked how many values are unique so I woudn't japerdise analysis by skipping this important step. I used **for** loop to get info about all colums.  
+**_Please Note:_**  
 I didn't include output of this code because it's too long, but I will provide my findings.
 ```python
 cols = twd_dataset.columns.tolist()
@@ -271,22 +271,22 @@ for stat in cols:
 - **177** unique titles
 - **55** directors (with one badly formatted row)
 - **69** writters (**9** that needs to be **corrected**)
-- incosistent using of `&` and `and` in `directed_by` and `written_by ` column
+- incosistent using of **"&"** and **"and"** in `directed_by` and `written_by ` column
 - **176** unique dates I had to check it but it's correct because epsides **2x8** and **2x9** aired at **same day**
 - **162** unique numbers of viewers
 - **35** unique IDMB average ratings
 - **176** different vote counts
 - and as last **177** unique synopsis
 
-So some things needed to be updated and changed to make this dataset ready to use. Firstly I fixed inconsistent usage of `&` and `and` at rows where episode was written by more than one writer.
+So some things needed to be updated and changed to make this dataset ready to use. Firstly I fixed inconsistent usage of "&" and "and" at rows where episode was written by **more than one** writer.
 ```python
 twd_dataset['written_by'].replace('&', 'and', inplace = True, regex = True)
 ```
-Second thing that need to be fixed was one value in `diredted_by` where names were separated with `space` so I changed that to `and`.
+Second thing that need to be fixed was one value in `diredted_by` where names were separated with **"space"** so I changed that to **"and"**.
 ```python
 twd_dataset.loc[twd_dataset['directed_by'] == 'Ernest DickersonGwyneth Horder-Payton', 'directed_by'] = 'Ernest Dickerson and Gwyneth Horder-Payton'
 ```
-Here I noticed that person named `David Leslie Johnson` sometimes appears as `David Leslie Johnson-McGoldrick` so I make sure to fix this along with all faulty `&` and `and` usage in `written_by` column.
+Here I noticed that person named **"David Leslie Johnson"** sometimes appears as **"David Leslie Johnson-McGoldrick"** so I make sure to fix this along with all faulty "&" and "and" usage in `written_by` column.
 ```python
 twd_dataset.loc[twd_dataset['written_by'] == 'David Leslie Johnson', 'written_by'] = 'David Leslie Johnson-McGoldrick'
 
