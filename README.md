@@ -330,3 +330,9 @@ plt.show()
 plt.savefig('number_of_episodes_by_season.png')
 ```
 ![Number Of Episodes By Season](img/number_of_episodes_by_season.png)  
+**Key Takeaways:**
+- **first** season had **6** episodes
+- **second** season had **13** episodes
+- **tenth** season had **22** epsiodes
+- **eleventh** season had **24** episodes
+- all **remaining** season had **16** episodes
