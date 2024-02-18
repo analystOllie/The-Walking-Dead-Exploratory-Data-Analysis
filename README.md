@@ -15,10 +15,11 @@ The series premiered on **October 31, 2010** and ended it's run with the **11th*
 - ⚙️[Data source](#data-source)
   - [Episodes](#episodes)
   - [IMDB](#imdb)
-- 🔍[Data Cleaning And Preparation](#data-cleaning-and-preparation)
+- 🧹[Data Cleaning And Preparation](#data-cleaning-and-preparation)
   - [Importing Libraries](#importing-libraries)
   - [Preparing Dataset](#preparing-dataset)
   - [Observing And Cleaning](#observing-and-cleaning)
+- 🔍[Analysis](#analysis)
 - 💡[Recommendations](#recommendations)
 - 🔖[Used Sources](#used-sources)
 
@@ -48,7 +49,7 @@ Second files is **the_walking_dead_imdb.csv** this file has less columns than pr
 | **3**          | original_air_date     | original air date        |                 |                    |                                                             |
 
 <p align = "center">
-  <b>"We are the walking dead." -Rick Grimes</b>
+  <b>"We Are The Walking Dead." -Rick Grimes</b>
 </p>
 
 ## Data Cleaning And Preparation
@@ -308,4 +309,6 @@ After this step number of **directors** changed from **57** to **55** and number
 ```python
 twd_dataset.to_csv('TWD_dataset.csv', encoding = 'utf-8', index = False)
 ```
-At this point I did everything with data in phase of preparing data for analysis. So let's move on to some **REAL** analysis stuff.🦸
+At this point I did everything with data in phase of preparing data for analysis. So let's move on to some **REAL** analysis stuff.🦸  
+
+## Analysis
