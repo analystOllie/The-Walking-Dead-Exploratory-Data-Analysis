@@ -48,8 +48,7 @@ Second files is **the_walking_dead_imdb.csv** this file has less columns than pr
 | **2**          | title                 | title of the episode     | **6**           | desc               | episode synopsis                                            |
 | **3**          | original_air_date     | original air date        |                 |                    |                                                             |
 <p align="center">
-  <span style="font-size: 35px; color: blue; font-weight: bold;"><b>"We Are The Walking Dead." -Rick Grimes</b></span>
-  <span style="color: blue;">This text is also blue</span>
+  <b>"We Are The Walking Dead." -Rick Grimes</b>
 </p>
 
 ## Data Cleaning And Preparation
