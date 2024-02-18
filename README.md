@@ -13,13 +13,13 @@ The series premiered on **October 31, 2010** and ended it's run with the **11th*
 ## Table of content
 - 📖[Introduction](#introduction)
 - ⚙️[Data source](#data-source)
-  - [Episodes](#episodes)
-  - [IMDB](#imdb)
+  - 📺[Episodes](#episodes)
+  - ⭐️[IMDB](#imdb)
 - 🧹[Data Cleaning And Preparation](#data-cleaning-and-preparation)
-  - [Importing Libraries](#importing-libraries)
-  - [Preparing Dataset](#preparing-dataset)
-  - [Observing And Cleaning](#observing-and-cleaning)
-- 🔍[Analysis](#analysis)
+  - 📦[Importing Libraries](#importing-libraries)
+  - 🛠️[Preparing Dataset](#preparing-dataset)
+  - 🔍[Observing And Cleaning](#observing-and-cleaning)
+- 📈[Analysis](#analysis)
 - 💡[Recommendations](#recommendations)
 - 🔖[Used Sources](#used-sources)
 
@@ -304,10 +304,14 @@ twd_dataset.loc[twd_dataset['written_by'] == 'Story by: Scott M. Gimple and Chan
 twd_dataset.loc[twd_dataset['written_by'] == 'Story by: Scott M. Gimple and David Leslie Johnson-McGoldrick and Angela KangTeleplay by: David Leslie Johnson-McGoldrick and Angela Kang', 'written_by'] = 'Scott M. Gimple and David Leslie Johnson-McGoldrick and Angela Kang'
 twd_dataset.loc[twd_dataset['written_by'] == 'Story by: Scott M. Gimple and Matthew NegreteTeleplay by: Matthew Negrete', 'written_by'] = 'Scott M. Gimple and Matthew Negrete'
 ```
-After this step number of **directors** changed from **57** to **55** and number of **writers** chnged from **69** to **67**. Dataset was finally complete and clean so I saved it before moving on. 
+After this step number of **writers** chnged from **69** to **67**. Dataset was finally complete and clean so I saved it before moving on. 
 ```python
 twd_dataset.to_csv('TWD_dataset.csv', encoding = 'utf-8', index = False)
 ```
 At this point I did everything with data in phase of preparing data for analysis. So let's move on to some **REAL** analysis stuff.🦸  
 
 ## Analysis
+I started my analysis with something basic. I looked at episode distribution over the seasons.
+```python
+
+```
