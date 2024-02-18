@@ -14,7 +14,7 @@ The series premiered on **October 31, 2010** and ended it's run with the **11th*
 - ⚙️[Data source](#data-source)
   - [Episodes](#episodes)
   - [IMDB](#imdb)
-- 🔍[Data Cleaning & Preparation](#data-cleaning-&-preparation)
+- 🔍[Data Cleaning And Preparation](#data-cleaning-and-preparation)
   - [Importing Libraries](#importing-libraries)
   - [Preparing Dataset](#preparing-dataset)
   - [Observing And Cleaning](#observing-and-cleaning)
@@ -46,7 +46,7 @@ Second files is **the_walking_dead_imdb.csv** this file has less columns than pr
 | **2**          | title                 | title of the episode     | **6**           | desc               | episode synopsis                                            |
 | **3**          | original_air_date     | original air date        |                 |                    |                                                             |
 
-## Data Cleaning & Preparation
+## Data Cleaning And Preparation
 Before I started with analysis in Python I took a peek at both files in Excel. Because both files has almost same structure and share majority of columns I diceded to merge these two files into before diving into analysis.<br>
   
 ### Importing libraries
