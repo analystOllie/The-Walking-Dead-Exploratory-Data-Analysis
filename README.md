@@ -336,3 +336,7 @@ plt.savefig('number_of_episodes_by_season.png')
 - **tenth** season had **22** epsiodes
 - **eleventh** season had **24** episodes
 - all **remaining** season had **16** episodes
+As next I took a look at vierwship over the series.
+```python
+
+```
