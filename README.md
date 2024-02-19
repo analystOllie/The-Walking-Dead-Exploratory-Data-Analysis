@@ -323,12 +323,19 @@ ax = plt.bar(season, episode, color = colors)
 ax = plt.gca()
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
+
+for i, value in enumerate(episode):
+    plt.text(i + 1, value, str(value), ha='center', va='bottom')
+
 plt.xlabel('Season')
 plt.ylabel('Number of Episodes')
 plt.xticks([1,2,3,4,5,6,7,8,9,10,11])
 plt.title('Number of Episodes by Season')
-plt.show()
+plt.gcf().set_size_inches(10, 6)
+plt.gca().set_aspect('auto')
+
 plt.savefig('number_of_episodes_by_season.png')
+plt.show()
 ```
 ![Number Of Episodes By Season](img/number_of_episodes_by_season.png)  
 **Key Takeaways:**
@@ -337,8 +344,82 @@ plt.savefig('number_of_episodes_by_season.png')
 - **tenth** season had **22** epsiodes
 - **eleventh** season had **24** episodes
 - all **remaining** season had **16** episodes
-As next I took a looked at vierwship over the series as well with IMDB ratings over the series.
+As next I took a looked at vierwship over the series as well with IMDB ratings over the series. I wanted to know when was the peak of viewership and IMDB rating and also when the series hit the rock bottom.
 ```python
+plt.figure(figsize=(20, 6))
 
+plt.subplot(1, 2, 1)
+ax = plt.plot(twd_dataset.episode_num_overall,twd_dataset.us_viewers, linestyle='-', color = '#CEA748')
+ax = plt.gca()
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+
+plt.gca().yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: '{:,.0f}'.format(x)))
+plt.ylim(ymin = 0)
+plt.yticks([0, 2000000, 4000000, 6000000, 8000000, 10000000, 12000000, 14000000, 16000000, 18000000])
+plt.xticks([0,15,30,45,60,75,90,105,120,135,150,165,177])
+
+plt.xlabel('Episode Number')
+plt.ylabel('Number of US Viewers')
+plt.title('US Viewership Across the Series')
+
+plt.gca().set_aspect('auto')
+
+plt.subplot(1, 2, 2)
+ax = plt.plot(twd_dataset.episode_num_overall,twd_dataset.imdb_rating, linestyle='-', color = '#CEA748')
+ax = plt.gca()
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+
+plt.gca().yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: '{:,.0f}'.format(x)))
+plt.yticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+plt.xticks([0,15,30,45,60,75,90,105,120,135,150,165,177])
+
+plt.xlabel('Episode Number')
+plt.ylabel('Average IMDB Rating')
+plt.title('Average IMDb Ratings Across the Series')
+
+plt.gca().set_aspect('auto')
+
+plt.savefig('viewers_and_imdb_over_the_series_merged.png')
+plt.show()
 ```
 ![IMDB and US Viewership Across the Series](img/viewers_and_imdb_over_the_series_merged.png) 
+```python
+twd_dataset[twd_dataset['us_viewers'] == max(twd_dataset['us_viewers'])]
+
+Output:
+| Season | Episode Num in Season | Episode Num Overall | Title        | Directed By   | Written By      | Original Air Date | US Viewers | IMDb Rating | Total Votes | Episode Synopsis                                            |
+|--------|-----------------------|---------------------|--------------|---------------|-----------------|-------------------|------------|-------------|-------------|-------------------------------------------------------------|
+| 5      | 1                     | 52                  | No Sanctuary | Greg Nicotero | Scott M. Gimple | 2014-10-12        | 17290000   | 9.6         | 28918       | Carol takes drastic action to rescue Rick and ...           |
+```
+```python
+twd_dataset[twd_dataset['us_viewers'] == min(twd_dataset['us_viewers'])]
+
+Output:
+| season | episode_num_in_season | episode_num_overall | title    | directed_by    | written_by    | original_air_date | us_viewers | imdb_rating | total_votes | episode_synopsis                                                |
+|--------|-----------------------|---------------------|----------|----------------|---------------|-------------------|------------|-------------|-------------|-----------------------------------------------------------------|
+| 11     | 17                    | 170                 | Lockdown | Greg Nicotero  | Julia Ruchman | 2022-10-02        | 1190000    | 7.4         | 4935        | Daryl and Negan rush to the commonwealth to st...               |
+```
+```python
+twd_dataset[twd_dataset['imdb_rating'] == max(twd_dataset['imdb_rating'])]
+
+Output:
+| Season | Episode Num in Season | Episode Num Overall | Title        | Directed By      | Written By      | Original Air Date | US Viewers | IMDb Rating | Total Votes | Episode Synopsis                                      |
+|--------|-----------------------|---------------------|--------------|------------------|-----------------|-------------------|------------|-------------|-------------|-------------------------------------------------------|
+| 4      | 8                     | 43                  | Too Far Gone | Ernest Dickerson | Seth Hoffman    | 2013-12-01        | 12050000   | 9.6         | 28102       | Rick and the group face imminent danger as The...     |
+| 5      | 1                     | 52                  | No Sanctuary | Greg Nicotero    | Scott M. Gimple | 2014-10-12        | 17290000   | 9.6         | 28918       | Carol takes drastic action to rescue Rick and ...     |
+| 6      | 9                     | 76                  | No Way Out   | Greg Nicotero    | Seth Hoffman    | 2016-02-14        | 13740000   | 9.6         | 30557       | Daryl, Abraham and Sasha face-off against the ...     |
+```
+```python
+twd_dataset[twd_dataset['imdb_rating'] == min(twd_dataset['imdb_rating'])]
+
+Output:
+| season | episode_num_in_season | episode_num_overall | title   | directed_by | written_by   | original_air_date    | us_viewers | imdb_rating | total_votes | episode_synopsis                                       |
+|--------|-----------------------|---------------------|---------|-------------|--------------|----------------------|------------|-------------|-------------|--------------------------------------------------------|
+| 10     | 21                    | 152                 | Diverged| David Boyd  | Heather Bellson | 2021-03-25        | 1940000    | 4.1         | 10179       | Daryl and Carol come to a fork in the road and...      |
+```
+**Key Takeaways:**  
+- US viewership was **increasing** in first 50 to 60 epsiodes than it started to get **lower**
+- IMDB ratings were changing less in first 50 to 60 epsidoes but after that changes were more noticable but still show had high rated and low rated episodes
+- best rated episodes were actually three: 4x8, 5x1 and 6x9 with average IMDB rating **9.6**
