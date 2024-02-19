@@ -403,6 +403,13 @@ Than I looked at individual seasons if I can find some patter in viewership or I
 ![US Viewership by Season](img/us_viewership_across_the_series_seasons.png)  
 
 When I looked at these charts I noticed that first three seasons finshed with highest viewership of the season. Season four to six started with highest viewership and kept very stable viewership. But from season seven there is noticable decrease of viewership. Seasons sevent to ten started with highest viewership and ended with lowest at the final epsiode of teh season. Season eleven is exception because it was series finale so it makes sense that more people wanted to see the end than usually.  
+
+![US Viewership by Season](img/us_viewership_across_the_series_seasons.png)  
+
+I looked at this chart which displays IMDR rating in each season and it's safe to say that rating were normal like with most of teh shows. Some great epsiodes some mid episodes and some that shouldn't be seen more than once. But first three seasons were more in ratings between 10 to 7,and from season six they were mostly in range between 8 to 6. Interesting is season 10 that had epsiodes with noticable low scores.
+
 **Key Takeaways:**  
 - viewership was increasing at only frist tree seasons
 - season seven seems to be the breaking point at viewership, from here viewers decreased more than before
+- IMDB ratings were quiet normal but there is decrease in ratings from season seven compared with first tree
+- most noticable drops in IMDB ratings are in season ten
