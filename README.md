@@ -317,29 +317,7 @@ At this point I did everything with data in phase of preparing data for analysis
 ## Analysis
 ### Episode Distribution  
 I started my analysis with something basic. I looked at episode distribution over the seasons.
-```python
-season = twd_dataset['season'].unique()
-episode = twd_dataset['season'].value_counts(sort = False)
-colors = ['#F2DCB3', '#EED5A0', '#E6C98A', '#DEC074', '#D6B35E', '#CEA748', '#C69A32', '#B58C28', '#A57D1F', '#954F15', '#85420D']
 
-ax = plt.bar(season, episode, color = colors)
-ax = plt.gca()
-ax.spines['top'].set_visible(False)
-ax.spines['right'].set_visible(False)
-
-for i, value in enumerate(episode):
-    plt.text(i + 1, value, str(value), ha='center', va='bottom')
-
-plt.xlabel('Season')
-plt.ylabel('Number of Episodes')
-plt.xticks([1,2,3,4,5,6,7,8,9,10,11])
-plt.title('Number of Episodes by Season')
-plt.gcf().set_size_inches(10, 6)
-plt.gca().set_aspect('auto')
-
-plt.savefig('number_of_episodes_by_season.png')
-plt.show()
-```
 ![Number Of Episodes By Season](img/number_of_episodes_by_season.png)  
 **Key Takeaways:**
 - **first** season had **6** episodes
