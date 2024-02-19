@@ -13,6 +13,7 @@ The series premiered on **October 31, 2010** and ended it's run with the **11th*
 </p>
 
 ## Table of content
+
 - 📖[Introduction](#introduction)
 - ⚙️[Data source](#data-source)
   - 📺[Episodes](#episodes)
@@ -28,12 +29,14 @@ The series premiered on **October 31, 2010** and ended it's run with the **11th*
 - 🔖[Used Sources](#used-sources)
 
 ## Data Source
+
 For this analysis I used dataset [The Walking Dead Episodes](https://www.kaggle.com/datasets/bcruise/the-walking-dead-episodes/data) (CC0: Public Domain, dataset made available through [Bill Cruise](https://www.kaggle.com/bcruise)).  
 
-This dataset has data about all 177 episodes. Dataset has total two **.csv** files. Both of these files has some common data in them but also  some differenies.
+The dataset has two **.csv** files in total. Both files have some common data in them but also some differences.
 
 ### Episodes
-First file is **the_walking_dead_episodes.csv** this file has total **eight** columns.
+
+The first file is **the_walking_dead_episodes.csv**, this file has a total of **eight** columns.
 
 | **Column #**   | **Column Name**       | **Description**          | **Column #**    | **Column Name**    | **Description**                 |
 |----------------|-----------------------|--------------------------|-----------------|--------------------|---------------------------------|
@@ -43,7 +46,8 @@ First file is **the_walking_dead_episodes.csv** this file has total **eight** co
 | **3**          | title                 | title of the episode     | **7**           | us_viewers         | US viewers on original air date |
 
 ### IMDB
-Second files is **the_walking_dead_imdb.csv** this file has less columns than previous, just **seven**.
+
+Second file is **the_walking_dead_imdb.csv**, this file has fewer columns than the previous one, only **seven**.
 
 | **Column #**   | **Column Name**       | **Description**          | **Column #**    | **Column Name**    | **Description**                                             |
 |----------------|-----------------------|--------------------------|-----------------|--------------------|-------------------------------------------------------------|
@@ -51,15 +55,19 @@ Second files is **the_walking_dead_imdb.csv** this file has less columns than pr
 | **1**          | episode_num_in_season | episode number in season | **5**           | total_votes        | total number of votes that <br>the IMDB rating was based on |
 | **2**          | title                 | title of the episode     | **6**           | desc               | episode synopsis                                            |
 | **3**          | original_air_date     | original air date        |                 |                    |                                                             |
+
 <p align="center">
   <b>"We Are The Walking Dead." -Rick Grimes</b>
 </p>
 
 ## Data Cleaning And Preparation
-Before I started with analysis in Python I took a peek at both files in Excel. Because both files has almost same structure and share majority of columns I diceded to merge these two files into before diving into analysis.<br>
+
+Before starting the analysis in **Python**, I took a look at both files in **Excel**. Since both files have almost the same structure and share most of the columns, I decided to merge these two files before diving into the analysis.<br>
   
 ### Importing Libraries
-I start my analysis by importing libraries of Python packages for needs of my analysis.
+
+I started my analysis by importing libraries from Python packages for the needs of my analysis.  
+
 ```python
 import pandas as pd
 import numpy as np
@@ -70,22 +78,29 @@ from scipy.stats import kruskal
 ```
 
 ### Preparing Dataset
-Then I loaded both files into dataframes.
+
+Then I loaded both files into **dataframes**. I named these dataframes `episodes` and `imdb`.
+
 ```python
 episodes = pd.read_csv('the_walking_dead_episodes.csv')
 imdb = pd.read_csv('the_walking_dead_imdb.csv')
 ```
-With both files successfuly loaded I merged them into one dataset that I will be using for rest of the analysis.
+
+With both files successfully loaded, I **merged them into one dataset** that I will use for the rest of the analysis.
+
 ```python
 twd_dataset = pd.merge(episodes, imdb)
 ```
-After I merged both files into one dataset I check created dataset if everything is like it should be.
+
+After merging both dataframes into one dataset, I checked the created dataset to see if everything was as it should be.
+
 ```python
 print(twd_dataset.shape)
 
 Output:
 (177,12)
 ```
+
 ```python
 twd_dataset.head()
 
@@ -99,17 +114,22 @@ Output:
 | 1      | 5                     | 5                   | Wildfire             | Ernest Dickerson      | Glen Mazzara                                | 2010-11-28        | 5560000.0   | 5           | 8.1         | 14856       | After the attack on the camp, Rick leads the s... |
 
 ```
-Dataset now has **177 rows** and **12 columns**. Number of rows is correct but when it comes to columns noticed that there was one column twice but with different naming. These two columns were `episode_num_in_season` and `episode_num`. Both of them had same meaning so I decide to drop one of them to keep my dataset clean.
+
+The dataset now has **177 rows** and **12 columns**. The number of rows is correct, but when it comes to the columns, I noticed that there was one column existed twice, with the same values but different name. These two columns were `episode_num_in_season` and `episode_num`. Both had the same meaning, so I decided to drop one of them to keep my dataset clean.
+
 ```python
 twd_dataset = twd_dataset.drop(['episode_num'], axis= 'columns')
 ```
-I checked again shape of the dataset to make sure all changes were applied and column was removed.
+
+I checked the shape of the dataset again to make sure all the changes were applied and the column was removed.
+
 ```python
 twd_dataset.shape
 
 Output:
 (177, 11)
 ```
+
 ```python
 twd_dataset.head()
 
@@ -123,12 +143,17 @@ Output:
 | 1      | 5                     | 5                   | Wildfire             | Ernest Dickerson      | Glen Mazzara                                | 2010-11-28        | 5560000.0   | 8.1         | 14856       | After the attack on the camp, Rick leads the s... |
 
 ```
-Also I renamed column `desc` which has synopsis of episode to `episode_synopsis` for much clearer naming.
+
+I also renamed the `desc` column, which contains the synopsis of the episode, to `episode_synopsis` for much clearer naming.
+
 ```python
 twd_dataset.rename(columns = {'desc': 'episode_synopsis'}, inplace = True)
 ```
+
 ### Observing And Cleaning
-At this moment dataset was ready so I took a step and looked at dataste more closely. First of all I check some basic informations about dataset.
+
+At this moment dataset was ready, so I took a step and looked at dataset more closely. First, I checked some basic information about the dataset.
+
 ```python
 twd_dataset
 
@@ -146,8 +171,8 @@ Output:
 | 11     | 22                    | 175                 | Faith                | Rose Troche           | Nicole Mirante-Matthews & Magali Lozano              | 2022-10-30        | 1390000.0   | 22          | 7.9         | 4891        | Ezekiel and Negan plan a work camp revolt; Eug...     |
 | 11     | 23                    | 176                 | Family               | Sharat Raju           | Magali Lozano & Erik Mountain & Kevin Deiboldt       | 2022-11-06        | 1470000.0   | 23          | 8.6         | 6483        | Reunited, the group heads back to the commonwe...     |
 | 11     | 24                    | 177                 | Rest in Peace        | Greg Nicotero         | Story by: Angela KangTeleplay by: Corey Reed &...    | 2022-11-20        | 2270000.0   | 24          | 8.3         | 11220       | Our survivors must save their kids and the Com...     |
-
 ```
+
 ```python
 twd_dataset.info()
 
@@ -172,18 +197,22 @@ Data columns (total 12 columns):
 dtypes: float64(2), int64(5), object(5)
 memory usage: 22.0+ KB
 ```
+
 **Key Takeaways:**  
-- dataset has **177 rows** and **11 columns**
-- **non** of the columns has **empty fields**
-- `original_air_date` and `us_viewers` has **wrong data types**
+- the dataset has **177 rows** and **11 columns**
+- **none** of the columns have **empty fields**
+- `original_air_date` and `us_viewers` have **wrong data types**
+
 ```python
 twd_dataset.duplicated().sum()
 
 Output:
 0
 ```
+
 **Key Takeaway:**  
-- dataset has **0** duplicated rows
+- dataset has **0** duplicate rows
+
 ```python
 display(twd_dataset.describe())
 
@@ -199,10 +228,11 @@ Output:
 | 75%       | 10.000000  | 13.000000             | 133.000000          | 1.238000e+07 | 8.500000    | 13039.000000 |
 | max       | 11.000000  | 24.000000             | 177.000000          | 1.729000e+07 | 9.600000    | 42427.000000 |
 ```
+
 **Key Takeaways:**  
 - seasons are from **1** to **11**
 - episdoes are from **1** to **177**
-- average US viewers, IMDB rating and total votes will be **analyzed more in depth later**
+
 ```python
 display(twd_dataset.describe(include = 'object'))
 
@@ -214,11 +244,13 @@ Output:
 | top           | Days Gone Bye  | Greg Nicotero   | Angela Kang  | Deputy Sheriff Rick Grimes awakens from a coma...    |
 | freq          | 1              | 37              | 15           | 10                                                   |
 ```
+
 **Key Takeaways:**  
 **_Please Note:_**  
-Later I discovered that names of some directors are not cleaned so take this part as initial look at data not final conclusion.
-- **Greg Nicotero** directed most episodes
+I later discovered that the names of some directors are not cleaned up, so take this part as a first look at the data, not a final description of the string columns.
+- **Greg Nicotero** directed most of the episodes
 - **Angela Kang** wrote most episodes
+
 ```python
 twd_dataset.isnull().apply(pd.Series.value_counts)
 
@@ -227,8 +259,10 @@ Output:
 |--------|-----------------------|---------------------|-------|-------------|------------|-------------------|-------------|-------------|-------------|-------------|------------------|
 | False  | 177                   | 177                 | 177   | 177         | 177        | 177               | 177         | 177         | 177         | 177         | 177              |
 ```
+
 **Key Takeaway:**  
-- **non** of the columns has missing values
+- **none** of the columns have missing values
+
 ```python
 twd_dataset.isna().apply(pd.Series.value_counts)
 
@@ -237,14 +271,17 @@ Output:
 |--------|-----------------------|---------------------|-------|-------------|------------|-------------------|-------------|-------------|-------------|------------------|
 | False  | 177                   | 177                 | 177   | 177         | 177        | 177               | 177         | 177         | 177         | 177              |
 ```
+
 **Key Takeaway:**  
-- **non** of the columns has NaN values
+- **none** of the columns have NaN values
   
-As I mentioned above columns `original_air_date` and `us_viewers` has a wrong data types. So I decide to chang `original_air_date` from `object`  to `datetime64[ns]` and `us_viewers` to `int`.
+As I mentioned above, the columns `original_air_date` and `us_viewers` have a wrong data type. So I decide to change `original_air_date` from `object` to `datetime64[ns]` and `us_viewers` to `int`.
+
 ```python
 twd_dataset['us_viewers'] = twd_dataset['us_viewers'].astype('int')
 twd_dataset['original_air_date'] = pd.to_datetime(twd_dataset['original_air_date'])
 ```
+
 ```python
 twd_dataset.dtypes
 
@@ -262,9 +299,11 @@ total_votes                       int64
 episode_synopsis                 object
 dtype: object
 ```
-Before I moved to some actual analysis lastly I looked at what values are stored in columns and also checked how many values are unique so I woudn't japerdise analysis by skipping this important step. I used **for** loop to get info about all colums.  
+
+Before I moved on to some actual analysis, I lastly looked at what values are stored in the columns and also checked how many values are unique so that I wouldn't japerdise the analysis by skipping this important step. I used a **for** loop to get information about all the columns.  
 **_Please Note:_**  
-I didn't include output of this code because it's too long, but I will provide my findings.
+I haven't included code output because it's too long, but I'll provide my results.
+
 ```python
 cols = twd_dataset.columns.tolist()
 
@@ -273,29 +312,35 @@ for stat in cols:
   print(twd_dataset[stat].unique())
   print('Number of unique: ' + str(twd_dataset[stat].nunique()))
 ```
+
 **Key Takeaways:**
 - there are **11** unique seasons
 - **24** unique episode numbers
 - **177** unique overall episodes
 - **177** unique titles
-- **55** directors (with one badly formatted row)
-- **69** writters (**9** that needs to be **corrected**)
-- incosistent using of **"&"** and **"and"** in `directed_by` and `written_by ` column
-- **176** unique dates I had to check it but it's correct because epsides **2x8** and **2x9** aired at **same day**
+- **55** directors (with one badly formatted record)
+- **69** writters (**9** that need to be **corrected**)
+- inconsistent use of **"&"** and **"and"** in `directed_by` and `written_by ` columns
+- **176** unique dates, because episodes **2x8** and **2x9** aired on the **same day**
 - **162** unique numbers of viewers
 - **35** unique IDMB average ratings
 - **176** different vote counts
-- and as last **177** unique synopsis
+- and last **177** unique synopses
 
-So some things needed to be updated and changed to make this dataset ready to use. Firstly I fixed inconsistent usage of "&" and "and" at rows where episode was written by **more than one** writer.
+So a few things had to be updated and changed to make this dataset usable. Firstly I fixed the inconsistent use of "&" and "and" in rows where the episode was written by **more than one** writer.
+
 ```python
 twd_dataset['written_by'].replace('&', 'and', inplace = True, regex = True)
 ```
-Second thing that need to be fixed was one value in `diredted_by` where names were separated with **"space"** so I changed that to **"and"**.
+
+Second thing that need to be fixed was one value in `directed_by` where the names were separated with **"space"** so I changed that to **"and"**.
+
 ```python
 twd_dataset.loc[twd_dataset['directed_by'] == 'Ernest DickersonGwyneth Horder-Payton', 'directed_by'] = 'Ernest Dickerson and Gwyneth Horder-Payton'
 ```
-Here I noticed that person named **"David Leslie Johnson"** sometimes appears as **"David Leslie Johnson-McGoldrick"** so I make sure to fix this along with all faulty "&" and "and" usage in `written_by` column.
+
+Here I noticed that the person named **"David Leslie Johnson"** sometimes appears as **"David Leslie Johnson-McGoldrick"**. After a few clicks on the IMDB page, I found that it's the same person with just an updated name so I made sure to fix this along with all the incorrect "&" and "and" usage in the `written_by` column.
+
 ```python
 twd_dataset.loc[twd_dataset['written_by'] == 'David Leslie Johnson', 'written_by'] = 'David Leslie Johnson-McGoldrick'
 
@@ -308,14 +353,19 @@ twd_dataset.loc[twd_dataset['written_by'] == 'Story by: Scott M. Gimple and Chan
 twd_dataset.loc[twd_dataset['written_by'] == 'Story by: Scott M. Gimple and David Leslie Johnson-McGoldrick and Angela KangTeleplay by: David Leslie Johnson-McGoldrick and Angela Kang', 'written_by'] = 'Scott M. Gimple and David Leslie Johnson-McGoldrick and Angela Kang'
 twd_dataset.loc[twd_dataset['written_by'] == 'Story by: Scott M. Gimple and Matthew NegreteTeleplay by: Matthew Negrete', 'written_by'] = 'Scott M. Gimple and Matthew Negrete'
 ```
-After this step number of **writers** chnged from **69** to **66**. Dataset was finally complete and clean so I saved it before moving on. 
+
+After this step, the number of **writers** changed from **69** to **66**.  The dataset was finally complete and clean, so I saved it before moving on. 
+
 ```python
 twd_dataset.to_csv('TWD_dataset.csv', encoding = 'utf-8', index = False)
 ```
-At this point I did everything with data in phase of preparing data for analysis. So let's move on to some **REAL** analysis stuff.🦸  
+
+At this point, I have done everything with data in the phase of preparing data for analysis. So let's move on to some **REAL** analysis stuff.🦸  
 
 ## Analysis
+
 ### Episode Distribution  
+
 I started my analysis with something basic. I looked at episode distribution over the seasons.
 
 ![Number Of Episodes By Season](img/number_of_episodes_by_season.png)  
