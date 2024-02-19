@@ -22,6 +22,8 @@ The series premiered on **October 31, 2010** and ended it's run with the **11th*
   - 🛠️[Preparing Dataset](#preparing-dataset)
   - 🔍[Observing And Cleaning](#observing-and-cleaning)
 - 📈[Analysis](#analysis)
+  - [Episode Distribution](#episode-distribution)
+  - [Viewership and IMDB Rating](#viewership-and-imdb-rating)
 - 💡[Recommendations](#recommendations)
 - 🔖[Used Sources](#used-sources)
 
@@ -313,6 +315,7 @@ twd_dataset.to_csv('TWD_dataset.csv', encoding = 'utf-8', index = False)
 At this point I did everything with data in phase of preparing data for analysis. So let's move on to some **REAL** analysis stuff.🦸  
 
 ## Analysis
+### Episode Distribution  
 I started my analysis with something basic. I looked at episode distribution over the seasons.
 ```python
 season = twd_dataset['season'].unique()
@@ -344,46 +347,10 @@ plt.show()
 - **tenth** season had **22** epsiodes
 - **eleventh** season had **24** episodes
 - all **remaining** season had **16** episodes
+### Viewership and IMDB Rating
+
 As next I took a looked at vierwship over the series as well with IMDB ratings over the series. I wanted to know when was the peak of viewership and IMDB rating and also when the series hit the rock bottom.
-```python
-plt.figure(figsize=(20, 6))
 
-plt.subplot(1, 2, 1)
-ax = plt.plot(twd_dataset.episode_num_overall,twd_dataset.us_viewers, linestyle='-', color = '#CEA748')
-ax = plt.gca()
-ax.spines['top'].set_visible(False)
-ax.spines['right'].set_visible(False)
-
-plt.gca().yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: '{:,.0f}'.format(x)))
-plt.ylim(ymin = 0)
-plt.yticks([0, 2000000, 4000000, 6000000, 8000000, 10000000, 12000000, 14000000, 16000000, 18000000])
-plt.xticks([0,15,30,45,60,75,90,105,120,135,150,165,177])
-
-plt.xlabel('Episode Number')
-plt.ylabel('Number of US Viewers')
-plt.title('US Viewership Across the Series')
-
-plt.gca().set_aspect('auto')
-
-plt.subplot(1, 2, 2)
-ax = plt.plot(twd_dataset.episode_num_overall,twd_dataset.imdb_rating, linestyle='-', color = '#CEA748')
-ax = plt.gca()
-ax.spines['top'].set_visible(False)
-ax.spines['right'].set_visible(False)
-
-plt.gca().yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: '{:,.0f}'.format(x)))
-plt.yticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-plt.xticks([0,15,30,45,60,75,90,105,120,135,150,165,177])
-
-plt.xlabel('Episode Number')
-plt.ylabel('Average IMDB Rating')
-plt.title('Average IMDb Ratings Across the Series')
-
-plt.gca().set_aspect('auto')
-
-plt.savefig('viewers_and_imdb_over_the_series_merged.png')
-plt.show()
-```
 ![IMDB and US Viewership Across the Series](img/viewers_and_imdb_over_the_series_merged.png) 
 Highest US viewership:
 ```python
@@ -431,43 +398,11 @@ Output:
 - most people watched at premier in US episode **5x1** with total **17 290 000** viewers
 - episode with lowest US viewers was **11x17** with only **1 190 000** viewers
   
-Than I looked at individual seasons if I can find some patter in viewership or IMDB rating throught a season.
-```python
-per_season = twd_dataset['season'].unique().tolist()
-num_seasons = len(per_season)
-num_rows = 4
-num_cols = (num_seasons + num_rows - 1) // num_rows
+Than I looked at individual seasons if I can find some patter in viewership or IMDB rating throught a season.  
 
-fig, axes = plt.subplots(num_rows, num_cols, figsize=(20, 10))
+![US Viewership by Season](img/us_viewership_across_the_series_seasons.png)  
 
-for i, season in enumerate(per_season):
-    number_of_episodes = twd_dataset['season'][twd_dataset['season'] == season].count()
-    ax = axes[i // num_cols, i % num_cols]
-
-    ax.spines['top'].set_visible(False)
-    ax.spines['right'].set_visible(False)
-
-    ax.plot(twd_dataset['episode_num_in_season'][twd_dataset['season'] == season], twd_dataset['us_viewers'][twd_dataset['season'] == season], color=colors[i], marker='o', ms=5)
-
-    ax.set_xlabel('Episode Number')
-    ax.set_ylabel('Number of viewers')
-    ax.set_xlim([1, number_of_episodes])
-    ax.set_ylim(ymin=0)
-    ax.set_title('Season ' + str(season))
-    number_of_episodes = range(number_of_episodes)
-    ax.set_xticks(range(len(number_of_episodes) + 2))
-    plt.xticks(rotation=45)
-
-    ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: '{:,.0f}'.format(x)))
-
-if num_seasons < num_rows * num_cols:
-    for i in range(num_seasons, num_rows * num_cols):
-        fig.delaxes(axes.flatten()[i])
-
-plt.tight_layout()
-
-plt.savefig('us_viewership_across_the_series_seasons.png')
-
-plt.show()
-```
-![US Viewership by Season](img/us_viewership_across_the_series_seasons.png) 
+When I looked at these charts I noticed that first three seasons finshed with highest viewership of the season. Season four to six started with highest viewership and kept very stable viewership. But from season seven there is noticable decrease of viewership. Seasons sevent to ten started with highest viewership and ended with lowest at the final epsiode of teh season. Season eleven is exception because it was series finale so it makes sense that more people wanted to see the end than usually.  
+**Key Takeaways:**  
+- viewership was increasing at only frist tree seasons
+- season seven seems to be the breaking point at viewership, from here viewers decreased more than before
