@@ -385,6 +385,7 @@ plt.savefig('viewers_and_imdb_over_the_series_merged.png')
 plt.show()
 ```
 ![IMDB and US Viewership Across the Series](img/viewers_and_imdb_over_the_series_merged.png) 
+Highest US viewership:
 ```python
 twd_dataset[twd_dataset['us_viewers'] == max(twd_dataset['us_viewers'])]
 
@@ -393,6 +394,7 @@ Output:
 |--------|-----------------------|---------------------|--------------|---------------|-----------------|-------------------|------------|-------------|-------------|-------------------------------------------------------------|
 | 5      | 1                     | 52                  | No Sanctuary | Greg Nicotero | Scott M. Gimple | 2014-10-12        | 17290000   | 9.6         | 28918       | Carol takes drastic action to rescue Rick and ...           |
 ```
+Lowest US viewership:
 ```python
 twd_dataset[twd_dataset['us_viewers'] == min(twd_dataset['us_viewers'])]
 
@@ -401,6 +403,7 @@ Output:
 |--------|-----------------------|---------------------|----------|----------------|---------------|-------------------|------------|-------------|-------------|-----------------------------------------------------------------|
 | 11     | 17                    | 170                 | Lockdown | Greg Nicotero  | Julia Ruchman | 2022-10-02        | 1190000    | 7.4         | 4935        | Daryl and Negan rush to the commonwealth to st...               |
 ```
+Highest IMDB rating:
 ```python
 twd_dataset[twd_dataset['imdb_rating'] == max(twd_dataset['imdb_rating'])]
 
@@ -411,6 +414,7 @@ Output:
 | 5      | 1                     | 52                  | No Sanctuary | Greg Nicotero    | Scott M. Gimple | 2014-10-12        | 17290000   | 9.6         | 28918       | Carol takes drastic action to rescue Rick and ...     |
 | 6      | 9                     | 76                  | No Way Out   | Greg Nicotero    | Seth Hoffman    | 2016-02-14        | 13740000   | 9.6         | 30557       | Daryl, Abraham and Sasha face-off against the ...     |
 ```
+Lowest IMDB rating:
 ```python
 twd_dataset[twd_dataset['imdb_rating'] == min(twd_dataset['imdb_rating'])]
 
@@ -421,5 +425,49 @@ Output:
 ```
 **Key Takeaways:**  
 - US viewership was **increasing** in first 50 to 60 epsiodes than it started to get **lower**
-- IMDB ratings were changing less in first 50 to 60 epsidoes but after that changes were more noticable but still show had high rated and low rated episodes
-- best rated episodes were actually three: 4x8, 5x1 and 6x9 with average IMDB rating **9.6**
+- IMDB ratings were changing less in first 50 to 60 epsidoes but after that changes were more noticable but still had high rated and low rated episodes
+- best rated episodes were actually three: **4x8, 5x1*** and **6x9** with average IMDB rating **9.6**
+- lowest rated episode was epsiode **10x21** with IMDB rating **4.1**
+- most people watched at premier in US episode **5x1** with total **17 290 000** viewers
+- episode with lowest US viewers was **11x17** with only **1 190 000** viewers
+  
+Than I looked at individual seasons if I can find some patter in viewership or IMDB rating throught a season.
+```python
+per_season = twd_dataset['season'].unique().tolist()
+num_seasons = len(per_season)
+num_rows = 4
+num_cols = (num_seasons + num_rows - 1) // num_rows
+
+fig, axes = plt.subplots(num_rows, num_cols, figsize=(20, 10))
+
+for i, season in enumerate(per_season):
+    number_of_episodes = twd_dataset['season'][twd_dataset['season'] == season].count()
+    ax = axes[i // num_cols, i % num_cols]
+
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+
+    ax.plot(twd_dataset['episode_num_in_season'][twd_dataset['season'] == season], twd_dataset['us_viewers'][twd_dataset['season'] == season], color=colors[i], marker='o', ms=5)
+
+    ax.set_xlabel('Episode Number')
+    ax.set_ylabel('Number of viewers')
+    ax.set_xlim([1, number_of_episodes])
+    ax.set_ylim(ymin=0)
+    ax.set_title('Season ' + str(season))
+    number_of_episodes = range(number_of_episodes)
+    ax.set_xticks(range(len(number_of_episodes) + 2))
+    plt.xticks(rotation=45)
+
+    ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: '{:,.0f}'.format(x)))
+
+if num_seasons < num_rows * num_cols:
+    for i in range(num_seasons, num_rows * num_cols):
+        fig.delaxes(axes.flatten()[i])
+
+plt.tight_layout()
+
+plt.savefig('us_viewership_across_the_series_seasons.png')
+
+plt.show()
+```
+![US Viewership by Season](img/us_viewership_across_the_series_seasons.png) 
