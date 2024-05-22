@@ -337,7 +337,7 @@ I strated analyzing this dataset with simple things:
 **Episode Distribution**  
 ![Number Of Episodes By Season](img/number_of_episodes_by_season.png)  
 ```python
-# Average episode numbe per season
+# Average episode number per season
 print((twd_dataset['episode_num_overall'].max()/twd_dataset['season'].max()).round(2))
 
 Output:
