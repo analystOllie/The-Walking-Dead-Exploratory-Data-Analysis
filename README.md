@@ -262,7 +262,7 @@ dtype: object
 
 Before proceeding with the actual analysis, I examined the values stored in the columns and checked how many unique values each column had to ensure I wouldn't jeopardize the analysis by skipping this important step.  
 **Please Note:**  
-The code output was too long to include here, but it is available in the Jupyter notebook in this [repository](https://github.com/analystOllie/The-Walking-Dead-Advanced-EDA/blob/main/TWD_EDA.ipynb).
+The code output was too long to include here, but it is available in the Jupyter notebook in this [repository](TWD_EDA_final.ipynb).
 
 ```python
 # Displaying number of unique values from each column with values
